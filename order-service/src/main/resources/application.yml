@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;sendStringParametersAsUnicode=false;databaseName=orderServiceDb;encrypt=true;trustServerCertificate=true;
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: MsSql41.
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: ${spring.application.name}-group-id
+
+server:
+  port: 8081
