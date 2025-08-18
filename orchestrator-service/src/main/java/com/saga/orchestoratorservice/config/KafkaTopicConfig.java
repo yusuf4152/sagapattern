@@ -1,4 +1,4 @@
-package com.saga.orderservice.config;
+package com.saga.orchestoratorservice.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,6 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic orderCreatedTopic() {
         return TopicBuilder.name(KafkaProperties.orderCreatedTopic).build();
-    };
+    }
 
 }
