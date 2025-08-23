@@ -10,10 +10,13 @@ spring:
     hibernate:
       ddl-auto: update
 
+app:
   kafka:
     bootstrap-servers: "localhost:9092"
     consumer:
       group-id: ${spring.application.name}-group-id
+    topic:
+      order-created: "order-created"
 
 server:
   port: 8081

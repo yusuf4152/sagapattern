@@ -20,6 +20,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ObjectMapper objectMapper;
+    private final KafkaProperties kafkaProperties;
     private final KafkaTemplate kafkaTemplate;
 
     public void createOrder(CreateOrderRequest createOrderRequest) {
@@ -31,7 +32,7 @@ public class OrderService {
                     new BigDecimal(savedOrder.getAmount()),
                     savedOrder.getOrderItems()
             );
-            this.kafkaTemplate.send(KafkaProperties.orderCreatedTopic, event);
+            this.kafkaTemplate.send(kafkaProperties.getTopic().getOrderCreated(), event);
         }catch (Exception e) {
             log.error(e.getMessage());
         }

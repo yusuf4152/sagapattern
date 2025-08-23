@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: inventory-service
+app:
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: ${spring.application.name}-group-id
+    topic:
+      order-created: "order-created"
+      check-inventory : "check-inventory"
+      inventory-check-failed: "inventory-check-failed"
+      inventory-check-succeed: "inventory-check-succeed"
+server:
+  port: 8084

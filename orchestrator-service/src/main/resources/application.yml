@@ -1,7 +1,16 @@
 spring:
   application:
     name: orchestrator-service
+app:
   kafka:
+    bootstrap-servers: "localhost:9092"
     consumer:
       group-id: ${spring.application.name}-group-id
-    bootstrap-servers: localhost:9092
+    topic:
+      order-created: "order-created"
+      payment-started: "payment-started"
+      payment-success: "payment-success"
+      check-inventory: "check-inventory"
+      inventory-check-succeed: "inventory-check-succeed"
+server:
+  port: 8082

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record OrderCreatedEvent (
+        Integer orderId,
         Integer customerId,
         BigDecimal totalAmount,
         List<OrderItem> orderItems

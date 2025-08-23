@@ -1,7 +1,29 @@
 package com.saga.orchestoratorservice.config;
 
 
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@Data
+@Configuration
+@ConfigurationProperties(prefix = "app.kafka")
 public class KafkaProperties {
-    public final static String orderCreatedTopic = "orderCreated";
-    public final static String consumerGroupId = "orchestrator-service-group";
+
+    private String bootstrapServers;
+    private Consumer consumer;
+    private Topic topic;
+
+    @Data
+    public static class Consumer {
+        private String groupId;
+    }
+
+    @Data
+    public static class Topic {
+        private String orderCreated;
+        private String paymentStarted;
+        private String checkInventory;
+        private String inventoryCheckSucceed;
+    }
 }
