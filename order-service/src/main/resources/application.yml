@@ -17,6 +17,8 @@ app:
       group-id: ${spring.application.name}-group-id
     topic:
       order-created: "order-created"
+      order-cancelled: "order-cancelled"
+      order-completed: "order-completed"
 
 server:
   port: 8081

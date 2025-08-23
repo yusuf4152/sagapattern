@@ -21,5 +21,7 @@ public class KafkaProperties {
     @Data
     public static class Topic {
         private String orderCreated;
+        private String orderCancelled;
+        private String orderCompleted;
     }
 }

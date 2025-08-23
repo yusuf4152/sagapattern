@@ -1,5 +1,6 @@
-package com.saga.orchestoratorservice.dto;
+package com.saga.orchestoratorservice.dto.payment;
 
+import com.saga.orchestoratorservice.dto.OrderItem;
 import lombok.Data;
 
 import java.math.BigDecimal;

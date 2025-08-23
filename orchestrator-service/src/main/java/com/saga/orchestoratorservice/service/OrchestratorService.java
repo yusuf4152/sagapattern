@@ -1,7 +1,15 @@
 package com.saga.orchestoratorservice.service;
 
 import com.saga.orchestoratorservice.config.KafkaProperties;
-import com.saga.orchestoratorservice.dto.*;
+import com.saga.orchestoratorservice.dto.inventory.InventoryCheckEvent;
+import com.saga.orchestoratorservice.dto.inventory.InventoryCheckFailedEvent;
+import com.saga.orchestoratorservice.dto.inventory.InventoryCheckSucceedEvent;
+import com.saga.orchestoratorservice.dto.order.OrderCancelledEvent;
+import com.saga.orchestoratorservice.dto.order.OrderCompletedEvent;
+import com.saga.orchestoratorservice.dto.order.OrderCreatedEvent;
+import com.saga.orchestoratorservice.dto.payment.PaymentFailedEvent;
+import com.saga.orchestoratorservice.dto.payment.PaymentStartedEvent;
+import com.saga.orchestoratorservice.dto.payment.PaymentSucceedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -32,6 +40,24 @@ public class OrchestratorService {
         paymentStartedEvent.setOrderItems(inventoryCheckSucceedEvent.getCheckedItems());
         paymentStartedEvent.setTotalAmount(inventoryCheckSucceedEvent.getTotalAmount());
         this.kafkaTemplate.send(this.kafkaProperties.getTopic().getPaymentStarted(), paymentStartedEvent);
+    }
+
+    public void handleInventoryCheckFailed(InventoryCheckFailedEvent inventoryCheckFailedEvent){
+        OrderCancelledEvent orderCancelledEvent = new OrderCancelledEvent();
+        orderCancelledEvent.setOrderId(inventoryCheckFailedEvent.getOrderId());
+        this.kafkaTemplate.send(this.kafkaProperties.getTopic().getOrderCancelled(), orderCancelledEvent);
+    }
+
+    public void handlePaymentFailed(PaymentFailedEvent paymentFailedEvent){
+        OrderCancelledEvent orderCancelledEvent = new OrderCancelledEvent();
+        orderCancelledEvent.setOrderId(paymentFailedEvent.getOrderId());
+        this.kafkaTemplate.send(this.kafkaProperties.getTopic().getOrderCancelled(), orderCancelledEvent);
+    }
+
+    public void handlePaymentSucceed(PaymentSucceedEvent paymentSucceedEvent){
+        OrderCompletedEvent orderCompletedEvent = new OrderCompletedEvent();
+        orderCompletedEvent.setOrderId(paymentSucceedEvent.getOrderId());
+        this.kafkaTemplate.send(this.kafkaProperties.getTopic().getOrderCompleted(), orderCompletedEvent);
     }
 
 }

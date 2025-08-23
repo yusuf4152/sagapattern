@@ -3,7 +3,7 @@ package com.saga.paymentservice.service;
 import com.saga.paymentservice.config.KafkaProperties;
 import com.saga.paymentservice.dto.PaymentFailedEvent;
 import com.saga.paymentservice.dto.PaymentStartedEvent;
-import com.saga.paymentservice.dto.PaymentSuccessEvent;
+import com.saga.paymentservice.dto.PaymentSucceedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class PaymentService {
         boolean isSuccess = Math.random()> 0.2;
         if (isSuccess) {
             String paymentTransactionId = UUID.randomUUID().toString();
-            PaymentSuccessEvent paymentSuccessEvent = new PaymentSuccessEvent();
+            PaymentSucceedEvent paymentSuccessEvent = new PaymentSucceedEvent();
             paymentSuccessEvent.setPaymentTransactionId(paymentTransactionId);
             paymentSuccessEvent.setCustomerId(paymentStartedEvent.getCustomerId());
             paymentSuccessEvent.setAmount(paymentStartedEvent.getAmount());

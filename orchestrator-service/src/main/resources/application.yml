@@ -9,8 +9,12 @@ app:
     topic:
       order-created: "order-created"
       payment-started: "payment-started"
-      payment-success: "payment-success"
+      payment-succeed: "payment-succeed"
+      payment-failed : "payment-failed"
       check-inventory: "check-inventory"
       inventory-check-succeed: "inventory-check-succeed"
+      inventory-check-failed: "inventory-check-failed"
+      order-cancelled: "order-cancelled"
+      order-completed: "order-completed"
 server:
   port: 8082

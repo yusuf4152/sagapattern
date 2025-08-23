@@ -17,4 +17,14 @@ public class KafkaTopicConfig {
         return TopicBuilder.name(kafkaProperties.getTopic().getOrderCreated()).build();
     };
 
+    @Bean
+    public NewTopic orderCompletedTopic() {
+        return TopicBuilder.name(kafkaProperties.getTopic().getOrderCompleted()).build();
+    };
+
+    @Bean
+    public NewTopic orderCancelledTopic() {
+        return TopicBuilder.name(kafkaProperties.getTopic().getOrderCancelled()).build();
+    };
+
 }

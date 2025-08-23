@@ -18,6 +18,16 @@ public class KafkaTopicConfig {
     }
 
     @Bean
+    public NewTopic orderCompletedTopic() {
+        return TopicBuilder.name(this.kafkaProperties.getTopic().getOrderCompleted()).build();
+    }
+
+    @Bean
+    public NewTopic orderCancelledTopic() {
+        return TopicBuilder.name(this.kafkaProperties.getTopic().getOrderCancelled()).build();
+    }
+
+    @Bean
     public NewTopic PaymentStartedTopic() {
         return TopicBuilder.name(this.kafkaProperties.getTopic().getPaymentStarted()).build();
     }
@@ -30,6 +40,11 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic inventoryCheckSucceedTopic() {
         return TopicBuilder.name(this.kafkaProperties.getTopic().getInventoryCheckSucceed()).build();
+    }
+
+    @Bean
+    public NewTopic inventoryCheckFailedTopic() {
+        return TopicBuilder.name(this.kafkaProperties.getTopic().getInventoryCheckFailed()).build();
     }
 
 }

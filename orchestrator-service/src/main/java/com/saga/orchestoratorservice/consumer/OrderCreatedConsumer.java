@@ -1,6 +1,6 @@
 package com.saga.orchestoratorservice.consumer;
 
-import com.saga.orchestoratorservice.dto.OrderCreatedEvent;
+import com.saga.orchestoratorservice.dto.order.OrderCreatedEvent;
 import com.saga.orchestoratorservice.service.ObjectMapperService;
 import com.saga.orchestoratorservice.service.OrchestratorService;
 import lombok.RequiredArgsConstructor;

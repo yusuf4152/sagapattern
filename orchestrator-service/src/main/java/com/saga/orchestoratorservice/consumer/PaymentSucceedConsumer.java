@@ -1,6 +1,6 @@
 package com.saga.orchestoratorservice.consumer;
 
-import com.saga.orchestoratorservice.dto.PaymentSuccessEvent;
+import com.saga.orchestoratorservice.dto.payment.PaymentSucceedEvent;
 import com.saga.orchestoratorservice.service.ObjectMapperService;
 import com.saga.orchestoratorservice.service.OrchestratorService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class PaymentSuccessConsumer {
+public class PaymentSucceedConsumer {
 
     private final ObjectMapperService objectMapperService;
     private final OrchestratorService orchestratorService;
@@ -17,9 +17,10 @@ public class PaymentSuccessConsumer {
     @KafkaListener(topics = "${app.kafka.topic.payment-success}", groupId = "${app.kafka.consumer.group-id}")
     private void handlePaymentSuccess(String message){
         try {
-            PaymentSuccessEvent paymentSuccessEvent = this.objectMapperService.readStringToObject(message, PaymentSuccessEvent.class);
+            PaymentSucceedEvent paymentSucceedEvent = this.objectMapperService.readStringToObject(message, PaymentSucceedEvent.class);
+            this.orchestratorService.handlePaymentSucceed(paymentSucceedEvent);
         }catch (Exception e){
-
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
